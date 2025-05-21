@@ -1,5 +1,6 @@
 target Python {
-  keepalive: true
+  keepalive: true,
+  no-compile: true
 }
 
 preamble {=
@@ -40,7 +41,7 @@ reactor WebServer(bank_index=0, STA=0) {
 
     def run_fastapi_app():
         print(f"[WebServer{self.bank_index}] FastAPI server starting")
-        uvicorn.run(self.app, host="127.0.0.1", port=5000+self.bank_index, log_level="warning")
+        uvicorn.run(self.app, host="0.0.0.0", port=12000+self.bank_index, log_level="warning")
     fastapi_thread = threading.Thread(target=run_fastapi_app)
     fastapi_thread.start()
   =}
